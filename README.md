@@ -1,3 +1,5 @@
+![Travis (.org)](https://img.shields.io/travis/pehaa/simple-notifications-solution.svg?style=for-the-badge)
+
 # Simple Notifications
 
 ## A simple solution for notifications.
