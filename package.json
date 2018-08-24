@@ -1,7 +1,7 @@
 {
   "name": "simple-notifications-solution",
   "version": "1.0.0",
-  "description": "A simple solution for notifications",
+  "description": "A tiny vanilla JS library that provides a simple solution for notifications.",
   "main": "./dist/Notifications.js",
   "scripts": {
     "preprod": "rimraf dist",
