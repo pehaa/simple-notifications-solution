@@ -1,5 +1,5 @@
 const webpackConfig = require('./webpack.test.js');
- 
+
 module.exports = function(config) {
   config.set({
     //root path location to resolve paths defined in files and exclude
@@ -16,9 +16,9 @@ module.exports = function(config) {
           //nocache: should the files be served from disk on each request by Karma's webserver?
       /*assets*/
           //{pattern: '*.html', watched:true, served:true, included:false}
-          //{pattern: 'images/*', watched:false, served:true, included:false}      
+          //{pattern: 'images/*', watched:false, served:true, included:false}
     ],
-    
+
     //executes the tests whenever one of watched files changes
     autoWatch: true,
     //if true, Karma will run tests and then exit browser
@@ -27,11 +27,11 @@ module.exports = function(config) {
     failOnEmptyTestSuite:false,
     //reduce the kind of information passed to the bash
     logLevel: config.LOG_WARN, //config.LOG_DISABLE, config.LOG_ERROR, config.LOG_INFO, config.LOG_DEBUG
-                                      
+
     //list of frameworks you want to use, only jasmine is installed automatically
     frameworks: ['jasmine'],
     //list of browsers to launch and capture
-    browsers: ['Chrome'/*,'PhantomJS','Firefox','Edge','ChromeCanary','Opera','IE','Safari'*/],
+    browsers: ['Chrome'/*,'','Firefox','Edge','ChromeCanary','Opera','IE','Safari'*/],
     //list of reporters to use
     reporters: ['mocha', 'progress', 'coverage-istanbul'/*,'dots','progress','spec'*/],
     coverageIstanbulReporter: {
@@ -52,7 +52,7 @@ module.exports = function(config) {
     browserNoActivityTimeout: 10000,
     //timeout for capturing a browser, 60000 is default
     captureTimeout: 60000,
- 
+
     client: {
       //capture all console output and pipe it to the terminal, true is default
       captureConsole:false,
@@ -67,7 +67,7 @@ module.exports = function(config) {
         random: false
       }
     },
- 
+
     /*karma-webpack config*/
     //pass your webpack configuration for karma
     webpack: webpackConfig,
@@ -82,7 +82,7 @@ module.exports = function(config) {
       noInfo: true,
       stats: 'errors-only'
     },
- 
+
     /*karma-mocha-reporter config*/
     mochaReporter: {
       output: 'noFailures'  //full, autowatch, minimal
