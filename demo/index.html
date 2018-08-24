@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Notifications System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+  
+  <link rel="stylesheet" href="Notifications.css">
+  
+  <style>
+    .section {
+      padding: 1.5rem;
+    }
+    .add-new {
+      z-index: 10000;
+      position: fixed;
+      bottom: 0;
+      background: rgb(220,220,220);
+      padding: 0 1rem 1rem;
+      width: 100%;
+    }
+    .add-new > * {
+      max-width: 800px;
+      margin: auto;
+    }
+    fieldset {
+      padding: 0 1rem 1rem;
+    }
+    .level {
+      margin-top: 1rem;
+      align-items: stretch;
+    }
+    .level-item {
+      flex-shrink: 1;
+      flex-basis: 0;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+    .level button {
+      height: calc(100% - 8px);
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="section content">
+      <h1 class="title">Simple Notifications</h1>
+      <p>I needed a simple notifications system with two kinds of possible behavior. Some notifications should <srong>close themselves</strong> without any action from the user. Some <strong>require clicking</strong> on the close button. All closed notifications should be removed from the DOM. The notifications may be on the page when it loads or may be added at any other moment.</p>
+      <p>I don't use any JavaScript library but this demo uses BULMA css framework.</p>
+      <p class="notification is-danger" role="alert">Errors happen. And it happened again.<button class="delete" type="button" aria-label="button"></button></p>
+      <p data-close="self" class="notification is-info" role="alert">You've just found what <b>you were looking for!</b></p>
+      <p class="notification is-success" role="alert">You rock! Don't forget it! <button class="delete" type="button" aria-label="button"></button></p>
+      <p data-close="self" class="notification is-warning" role="alert">Weather warnings for strong winds and rain!</p>
+      <h2>How?</h2>
+      <p>The script uses the <code>animationstart</code> listener for the dynamically added notifications.</p>
+      <p>In your css you need to set the <em>"in"</em> for your notification, and define the keyframes for the <em>"out"</em> animation.</p>
+    </section>
+  </div>
+  <section class="add-new">
+    <div class="level is-mobile">
+      <fieldset class="level-left level-item">
+        <legend class="heading">Behavior</legend>
+        <label>
+          <input name="self-closing" type="radio" value="yes" checked>
+          Self closing
+        </label>
+        <label>
+          <input name="self-closing" type="radio" value="no">
+          With close button
+        </label>
+      </fieldset>
+      <fieldset class="level-item">
+        <legend class="heading">Type</legend>
+        <label>
+          <input name="notif-type" type="radio" value="info" checked>
+          Info
+        </label>
+        <label>
+          <input name="notif-type" type="radio" value="success">
+          Success
+        </label>
+        <label>
+          <input name="notif-type" type="radio" value="error">
+          Error
+        </label>
+      </fieldset>
+      <div class="level-right">
+        <button id="add-new" type="button" class="button heading is-primary">Add new</button>
+      </div>
+    </div>
+  </section>
+  <!-- library -->
+  <script src="Notifications.js"></script>
+  <!-- demo -->
+  <script>
+  var notificationTexts = {
+    info: Array('Successfully authenticated', 'Your subscription was registered. We\'ve sent you a confirmation email', 'Did you know that a rainbow can be seen only in the morning or late afternoon. It can occur only when the sun is 40 degrees or less above the horizon.', 'Did you know that among all shapes with the same area, circle has the shortest perimeter.', 'You reached the bottom of the page.'),
+    success: Array('Your email was sent successfully.', 'The database is created.', 'You did it!', 'You are the winner!', 'Yes! Absolutely best score ever!', 'Your story, your success...', 'Whatever you wish.'),
+    error: Array('Authentication failed', 'Something went wrong! Please come back later.', 'Sorry, the service is temporarily unavailable', 'Sorry, we are out of office', 'The quota was reached!', 'Errors happen', 'It seems that there is a typo in your message.') };
+
+  var ADDNEW = document.getElementById("add-new");
+  var radiosBehavior = document.getElementsByName('self-closing');
+  var radiosType = document.getElementsByName('notif-type');
+  ADDNEW.addEventListener('click', function () {
+    var behaviorValue = 'yes';
+    var typeValue = 'info';
+    for (var i = 0, length = radiosBehavior.length; i < length; i++) {
+      if (radiosBehavior[i].checked) {
+        behaviorValue = radiosBehavior[i].value;
+        break;
+      }
+    }
+    for (var _i = 0, _length = radiosType.length; _i < _length; _i++) {
+      if (radiosType[_i].checked) {
+        typeValue = radiosType[_i].value;
+        break;
+      }
+    }
+    var el = document.createElement('p');
+    el.classList.add('notification');
+    var innerHTML = '';
+    var random = Math.floor(Math.random() * notificationTexts[typeValue].length);
+
+    innerHTML = notificationTexts[typeValue][random];
+    switch (typeValue) {
+      case "success":
+        el.classList.add('is-success');
+        break;
+      case "error":
+        el.classList.add('is-danger');
+        break;
+      case "warning":
+        el.classList.add('is-warning');
+        break;
+      default:
+        el.classList.add('is-primary');
+        break;
+      }
+    if (behaviorValue === 'yes') {
+      el.setAttribute('data-close', 'self');
+    } else {
+      innerHTML += '<button class="delete" type="button" aria-label="button">';
+    }
+    el.innerHTML = innerHTML;
+    document.querySelector('body').appendChild(el);
+  });
+  </script>
+  <!-- init -->
+  <script>
+    var notifications = new Notifications("p.notification", {closeSelfOnClick: true});
+    notifications.init();
+  </script>
+</body>
+</html>
