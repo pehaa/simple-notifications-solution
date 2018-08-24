@@ -1,4 +1,5 @@
 ![Travis (.org)](https://img.shields.io/travis/pehaa/simple-notifications-solution.svg?style=for-the-badge)
+![Codecov](https://img.shields.io/codecov/c/github/pehaa/simple-notifications-solution.svg?style=for-the-badge)
 
 # Simple Notifications
 
