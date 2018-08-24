@@ -31,8 +31,13 @@ module.exports = function(config) {
     //list of frameworks you want to use, only jasmine is installed automatically
     frameworks: ['jasmine'],
     //list of browsers to launch and capture
-    browsers: ['Chrome'/*,'','Firefox','Edge','ChromeCanary','Opera','IE','Safari'*/],
-    //list of reporters to use
+    browsers: ['HeadlessChrome'],
+    customLaunchers:{
+      HeadlessChrome:{
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
     reporters: ['mocha', 'progress', 'coverage-istanbul'/*,'dots','progress','spec'*/],
     coverageIstanbulReporter: {
       reports: ['html', 'lcovonly', 'text-summary'],
