@@ -8,7 +8,7 @@
     "predemo": "rimraf demo",
     "test": "karma start",
     "singletest": "karma start --single-run",
-    "report-coverage" : "cat ./coverage/lcov.info || codecov",
+    "report-coverage" : "cat ./coverage/lcov.info | codecov",
     "webpack": "webpack",
     "webpack-dev-server": "webpack-dev-server",
     "dev": "npm run webpack-dev-server -- --env.mode development --hot",
