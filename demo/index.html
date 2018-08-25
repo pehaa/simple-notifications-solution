@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Simple Notifications System</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+  <link id="bulma-stylesheet" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
   
   <link rel="stylesheet" href="Notifications.css">
   
   <style>
+    html {
+      font-family: sans-serif;
+    }
     .section {
       padding: 1.5rem;
     }
@@ -16,10 +19,11 @@
       position: fixed;
       bottom: 0;
       background: rgb(220,220,220);
-      padding: 0 1rem 1rem;
+      padding: 1rem;
       width: 100%;
     }
     .add-new > * {
+      display: block;
       max-width: 800px;
       margin: auto;
     }
@@ -47,18 +51,20 @@
   <div class="container">
     <section class="section content">
       <h1 class="title">Simple Notifications</h1>
-      <p>I needed a simple notifications system with two kinds of possible behavior. Some notifications should <srong>close themselves</strong> without any action from the user. Some <strong>require clicking</strong> on the close button. All closed notifications should be removed from the DOM. The notifications may be on the page when it loads or may be added at any other moment.</p>
-      <p>I don't use any JavaScript library but this demo uses BULMA css framework.</p>
-      <p class="notification is-danger" role="alert">Errors happen. And it happened again.<button class="delete" type="button" aria-label="button"></button></p>
+      <h2>Why?</h2>
+      <p>We needed a light and simple notifications system with two kinds of possible behavior. Some notifications should <strong>close themselves</strong> without any action from the user. Some <strong>require clicking</strong> on the close button. All closed notifications should be removed from the DOM. The notifications may be on the page when it loads or may be added at any other moment.</p>
+      <p>We don't use any JavaScript library but this demo uses <a href="https://bulma.io/">BULMA css framework.</a>You can disable BULMA styles in the panel at the bottom of the page.</p>
+      <p class="notification is-danger" role="alert">Errors happen. And it happened again.<button class="delete" type="button">Close</button></p>
       <p data-close="self" class="notification is-info" role="alert">You've just found what <b>you were looking for!</b></p>
-      <p class="notification is-success" role="alert">You rock! Don't forget it! <button class="delete" type="button" aria-label="button"></button></p>
+      <p class="notification is-success" role="alert">You rock! Don't forget it! <button class="delete" type="button">Close</button></p>
       <p data-close="self" class="notification is-warning" role="alert">Weather warnings for strong winds and rain!</p>
-      <h2>How?</h2>
-      <p>The script uses the <code>animationstart</code> listener for the dynamically added notifications.</p>
-      <p>In your css you need to set the <em>"in"</em> for your notification, and define the keyframes for the <em>"out"</em> animation.</p>
     </section>
   </div>
   <section class="add-new">
+    <label>
+      <input id="bulma-state" name="bulma" type="checkbox" checked>
+      Bulma CSS Enabled
+    </label>
     <div class="level is-mobile">
       <fieldset class="level-left level-item">
         <legend class="heading">Behavior</legend>
@@ -103,6 +109,16 @@
   var ADDNEW = document.getElementById("add-new");
   var radiosBehavior = document.getElementsByName('self-closing');
   var radiosType = document.getElementsByName('notif-type');
+
+  var CHECKBOX = document.getElementById("bulma-state");
+  var bulmaStylesheet = document.getElementById("bulma-stylesheet");
+  CHECKBOX.addEventListener( 'change', function() {
+      if( this.checked ) {
+        bulmaStylesheet.disabled = false;
+      } else {
+        bulmaStylesheet.disabled = true;
+      }
+  });
   ADDNEW.addEventListener('click', function () {
     var behaviorValue = 'yes';
     var typeValue = 'info';
@@ -141,7 +157,7 @@
     if (behaviorValue === 'yes') {
       el.setAttribute('data-close', 'self');
     } else {
-      innerHTML += '<button class="delete" type="button" aria-label="button">';
+      innerHTML += '<button class="delete" type="button">Close</button>';
     }
     el.innerHTML = innerHTML;
     document.querySelector('body').appendChild(el);
