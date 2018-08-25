@@ -43,7 +43,7 @@ describe('Default selector should be', () => {
 })
 
 describe('Default selector should be overridden', () => {
-    let notifs = new Notifications("p.notification")
+    let notifs = new Notifications('p.notification')
     it('by p.notification', () => {
         expect( notifs.selector ).toEqual('p.notification')
     })
