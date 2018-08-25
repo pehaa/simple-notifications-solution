@@ -10,7 +10,7 @@ script:
   - npm run validate
 after_success:
   - npm run report-coverage
-  - npm run travis-deploy-once "npm run semantic-release"
+  - npm run semantic-release
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
