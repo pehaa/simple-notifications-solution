@@ -1,6 +1,6 @@
 {
   "name": "simple-notifications-solution",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "A tiny vanilla JS library that provides a simple solution for notifications.",
   "main": "./dist/Notifications.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "predemo": "rimraf demo",
     "test": "karma start",
     "singletest": "karma start --single-run",
-    "report-coverage" : "cat ./coverage/lcov.info | codecov",
+    "report-coverage": "cat ./coverage/lcov.info | codecov",
     "webpack": "webpack",
     "webpack-dev-server": "webpack-dev-server",
     "dev": "npm run webpack-dev-server -- --env.mode development --hot",
@@ -16,14 +16,16 @@
     "demo": "npm run webpack -- --env.mode production --env.destination demo",
     "build": "npm run prod && npm run demo",
     "lint": "eslint tests/src src --fix",
-    "validate": "npm-run-all lint singletest"
+    "validate": "npm-run-all lint singletest",
+    "travis-deploy-once": "travis-deploy-once",
+    "semantic-release": "semantic-release"
   },
   "files": [
     "/dist"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pehaa/simple-notifications-solution.git"
+    "url": "https://github.com/pehaa/simple-notifications-solution.git"
   },
   "keywords": [
     "vanilla",
@@ -66,7 +68,9 @@
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5",
     "webpack-karma-jasmine": "^2.0.4",
-    "webpack-merge": "^4.1.4"
+    "webpack-merge": "^4.1.4",
+    "travis-deploy-once": "^5.0.3",
+    "semantic-release": "^15.9.9"
   },
   "dependencies": {},
   "config": {
