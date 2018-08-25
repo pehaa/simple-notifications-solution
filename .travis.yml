@@ -6,13 +6,11 @@ notifications:
   email: false
 node_js:
   - '10'
-script:
-  - npm run validate
+  - '9'
+  - '8'
+  - '6'
 after_success:
-  - npm run report-coverage
-  - npm run semantic-release
+  - npm run travis-deploy-once "npm run semantic-release"
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
-
-
