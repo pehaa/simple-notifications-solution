@@ -16,7 +16,7 @@
     "demo": "npm run webpack -- --env.mode production --env.destination demo",
     "build": "npm run prod && npm run demo",
     "lint": "eslint tests/src src --fix",
-    "validate": "npm-run-all lint singletest",
+    "validate": "npm-run-all lint singletest"
   },
   "files": [
     "/dist"
