@@ -1,5 +1,5 @@
 export class Notifications {
-    constructor (selector, options = {} ) {
+    constructor (selector = '.notification', options = {} ) {
         this.selector = selector
         this.options = {
             animationInName: 'slidein',
