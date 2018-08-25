@@ -18,7 +18,7 @@
     "lint": "eslint tests/src src --fix",
     "validate": "npm-run-all lint singletest",
     "travis-deploy-once": "travis-deploy-once",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "files": [
     "/dist"
