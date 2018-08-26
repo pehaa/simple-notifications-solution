@@ -24,10 +24,11 @@ The script uses the ``` animationstart``` listener for the dynamically added not
 
 ## Installation
 
+The ```dist``` folder contains the ready for production minified files: ```Notifications.js``` and ```Notifications.css```
 ```html
 <head>
   ...
-  <link rel="stylesheet" type="text/css" href="dist/Notifications.css">
+  <link rel="stylesheet" href="dist/Notifications.css">
   <style>
     /* override styles here */
   </style>
@@ -46,6 +47,31 @@ The script uses the ``` animationstart``` listener for the dynamically added not
   </script>
 </body>
 ```
+
+You can also use the cdn solution
+```html
+<head>
+  ...
+  <link rel="stylesheet" href="https://unpkg.com/simple-notifications-solution/dist/Notifications.css">
+  <style>
+    /* override styles here */
+  </style>
+</head>
+<body>
+  <p class="notification" data-close="self">Self-closing notification</p>
+  <p class="notification">
+    This one needs user's action.
+    <button class="delete" type="button">Close</button>
+  </p>
+  <!-- Bottom of body -->
+  <script src="https://unpkg.com/simple-notifications-solution/dist/Notifications.js"></script>
+  <script>
+    var notifications = new Notifications(".notification");
+    notifications.init();
+  </script>
+</body>
+```
+
 
 #### npm:
 ```bash
@@ -75,11 +101,13 @@ The recommended markups for a notification are like that:
 You have to use the ```notification``` class since it's used in the .css file.
 You need to add the ```data-close="self"``` attribute to your notification if you want it to close automatically.
 
-To activate the notifications add the following
+To activate the notifications add the following:
 ```js
-var notifications = new Notifications(".notification");
+var notifications = new Notifications();
 notifications.init();
 ```
+You can check it on Codepen [here.](https://codepen.io/pehaa/pen/yxeoXq/)
+
 ### Customization
 
 You can initiate Notifications with some options, the available options are:
@@ -136,7 +164,11 @@ var options = {
 var notifications = new Notifications(".notification", options);
 notifications.init();
 </script>
+
 ```
+A Codepen demo is available [here.](https://codepen.io/pehaa/pen/aadymx)
+
+
 ```html
 <style>
 .notification {
@@ -158,3 +190,4 @@ var notifications = new Notifications(".notification", {animationInName: "fadein
 notifications.init();
 </script>
 ```
+A Codepen demo is available [here.](https://codepen.io/pehaa/pen/wEMqdq)
