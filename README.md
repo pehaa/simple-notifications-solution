@@ -125,7 +125,7 @@ You can initiate Notifications with some options, the available options are:
   // whether you can also close the self-closing notification by clicking on it
   closeSelfOnClick: true,
   // the vertical distance from the top of the viewport
-  topStartPosition: 8,
+  startTopPosition: 8,
   // the vertical gap between the notifications as they appear on the screen
   gap: 8,
   // the waiting time before removing a notification, i - is the number of notifications before the current one
