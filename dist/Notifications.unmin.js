@@ -147,6 +147,7 @@ var Notifications = exports.Notifications = function () {
             animationOutClose: 'fadeout 1s',
             closeButtonSelector: '.delete',
             closeSelfOnClick: true,
+            startTopPosition: 8,
             gap: 8,
             delayFunction: function delayFunction(i) {
                 return 3 + 2 * i;
@@ -210,7 +211,7 @@ var Notifications = exports.Notifications = function () {
         value: function setTopPositions() {
             var _this4 = this;
 
-            var startHeight = this.options.gap;
+            var startHeight = this.options.startTopPosition;
             this.allNotifications().forEach(function (el) {
                 el.style.top = startHeight + 'px';
                 startHeight += el.offsetHeight + _this4.options.gap;
