@@ -6,6 +6,7 @@ const defaults = {
     animationOutClose: 'fadeout 1s',
     closeButtonSelector: '.delete',
     closeSelfOnClick: true,
+    startTopPosition: 8,
     gap: 8,
     delayFunction: (i) => 3 + 2*i,
     topTransition: 'top .75s ease-in-out'
@@ -16,6 +17,7 @@ const config = {
     animationOutSelf: 'slidein 1s',
     animationOutClose: 'fadeout 1s',
     closeButtonSelector: '.close-me',
+    startTopPosition: 48,
     gap: 12,
     delayFunction: (i) => 3*i+4,
     topTransition: 'top 1s ease-in',
@@ -136,7 +138,8 @@ describe('The init method should', () => {
 describe('The onload method should', () => {
     let notifs
     beforeEach( () => {
-        notifs = new Notifications()
+        document.body.innerHTML = innerHTML
+        notifs = new Notifications('p.notification')
     })
     it('call the setTopPositions method', () => {
         spyOn( Notifications.prototype, 'setTopPositions')
@@ -331,6 +334,7 @@ describe('the onStartHandler method should', () => {
 
 describe('the setTopPositions method', () => {
     let notifs
+    const startPosition = 32
     beforeEach( () => {
         document.body.innerHTML = `<p class="notification is-danger" role="alert"></p>
       <p data-close="self" class="notification is-info" role="alert"></p>
@@ -338,19 +342,19 @@ describe('the setTopPositions method', () => {
       <p data-close="self" class="notification is-warning" role="alert"></p>
       <div data-close="self" class="notification is-warning" role="alert"></div>
       <p data-close="self" class="notifications is-warning" role="alert"></p>`
-        notifs = new Notifications('p.notification')
+        notifs = new Notifications('.notification', {startTopPosition: startPosition})
     })
     it('should set top style attribute', () => {
         notifs.setTopPositions()
         notifs.allNotifications().forEach((el, i) => {
-            expect(getComputedStyle(el).top).toEqual(`${(notifs.options.gap*(i+1))}px`)
+            expect(getComputedStyle(el).top).toEqual(`${(notifs.options.gap*(i)+startPosition)}px`)
         })
         notifs.allNotifications().forEach((el) => {
             el.style.height = '20px'
         })
         notifs.setTopPositions()
         notifs.allNotifications().forEach((el, i) => {
-            expect(parseInt(getComputedStyle(el).top)).toEqual(20*i+8*(i+1))
+            expect(parseInt(getComputedStyle(el).top)).toEqual(20*i+8*(i)+startPosition)
         })
     })
     it('call the addExitAnimation on elements that needs resume', () => {

@@ -15,6 +15,7 @@ Some **require clicking** on the close button.
 All closed notifications should be removed from the DOM. The notifications may be on the page when it loads or may be added at any other moment.
 
 It does not use any JavaScript library. The demo uses [BULMA css framework](https://bulma.io).
+
 ### Demo
 You can find [the demo here](https://pepsized.com/wp-content/uploads/2018/08/index.html).
 
@@ -123,6 +124,8 @@ You can initiate Notifications with some options, the available options are:
   closeButtonSelector: '.delete',
   // whether you can also close the self-closing notification by clicking on it
   closeSelfOnClick: true,
+  // the vertical distance from the top of the viewport
+  topStartPosition: 8,
   // the vertical gap between the notifications as they appear on the screen
   gap: 8,
   // the waiting time before removing a notification, i - is the number of notifications before the current one

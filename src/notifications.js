@@ -7,6 +7,7 @@ export class Notifications {
             animationOutClose: 'fadeout 1s',
             closeButtonSelector: '.delete',
             closeSelfOnClick: true,
+            startTopPosition: 8,
             gap: 8,
             delayFunction: (i) => 3 + 2*i,
             topTransition: 'top .75s ease-in-out'
@@ -50,7 +51,7 @@ export class Notifications {
     }
 
     setTopPositions () {
-        let startHeight = this.options.gap
+        let startHeight = this.options.startTopPosition
         this.allNotifications().forEach( (el) => {
             el.style.top = `${startHeight}px`
             startHeight += el.offsetHeight + this.options.gap
